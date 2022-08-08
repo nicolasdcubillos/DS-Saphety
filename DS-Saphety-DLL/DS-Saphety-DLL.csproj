@@ -48,6 +48,8 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DTO-Request.cs" />
+    <Compile Include="DTO-Response.cs" />
     <Compile Include="DS-Saphety.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
