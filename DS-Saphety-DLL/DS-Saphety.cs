@@ -1,36 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
+using Newtonsoft.Json;
 
 namespace DS_Saphety_DLL
 {
+    public class GetTokenDTO
+    {
+        public string username { get; set; }
+        public string password { get; set; }
+        public string virtual_operator { get; set; }
+
+    }
     public class DocumentoSoporte
     {
         [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-        public interface IProbaDll
+        public interface DLLInterface
         {
             [DispId(0)]
-            int Add(int a, int b);
-            [DispId(1)]
-            string HelloWorld();
+            string test();
         }
 
-        [ComSourceInterfaces(typeof(IProbaDll))]
+        [ComSourceInterfaces(typeof(DLLInterface))]
         [ClassInterface(ClassInterfaceType.AutoDual)]
         [ProgId("DSSaphety.Class")]
         [ComVisible(true)]
-        public class DSSaphety : IProbaDll
+        public class DSSaphety : DLLInterface
         {
-            public int Add(int a, int b)
+            public string test()
             {
-                return a * b;
-            }
-            public string HelloWorld()
-            {
-                return "Hello world";
+                var objPrueba = new GetTokenDTO();
+                objPrueba.password = "password321";
+                objPrueba.username = "username123";
+                objPrueba.virtual_operator = "voperator444";
+                return JsonConvert.SerializeObject(objPrueba);
             }
         }
     }
