@@ -9,7 +9,7 @@ namespace DS_Saphety_DLL
         public interface DLLInterface
         {
             [DispId(0)]
-            bool test();
+            string enviarDocumentoSoporte();
         }
 
         [ComSourceInterfaces(typeof(DLLInterface))]
@@ -18,9 +18,9 @@ namespace DS_Saphety_DLL
         [ComVisible(true)]
         public class DSSaphety : DLLInterface
         {
-            public bool test()
+            public string enviarDocumentoSoporte ()
             {
-                return true;
+                return "";
             }
         }
     }
