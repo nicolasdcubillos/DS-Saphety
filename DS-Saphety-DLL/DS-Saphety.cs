@@ -10,6 +10,8 @@ namespace DS_Saphety_DLL
         {
             [DispId(0)]
             string enviarDocumentoSoporte();
+            [DispId(1)]
+            bool getAccessToken();
         }
 
         [ComSourceInterfaces(typeof(DLLInterface))]
@@ -22,6 +24,10 @@ namespace DS_Saphety_DLL
             public string enviarDocumentoSoporte ()
             {
                 return invoiceController.enviarDocumentoSoporte();
+            }
+            public bool getAccessToken()
+            {
+                return invoiceController.getAccessToken();
             }
         }
     }

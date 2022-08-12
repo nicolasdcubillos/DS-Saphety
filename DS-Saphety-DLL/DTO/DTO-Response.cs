@@ -5,21 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DS_Saphety_DLL
-{
-    internal class WarningDTO
+{ 
+    internal class WarningErrorDTO
     {
-
-    }
-
-    internal class ErrorDTO
-    {
-
+        public string Field { get; set; }
+        public string Code { get; set; }
+        public string Description { get; set; }
+        public List <String> ExplanationValues { get; set; }
     }
     internal class RespuestaSaphetyDTO
     {
         public bool isValid { get; set; }
-        public List <WarningDTO> warnings { get; set; }
-        public List <ErrorDTO> errors { get; set; } 
+        public List <WarningErrorDTO> warnings { get; set; }
+        public List <WarningErrorDTO> errors { get; set; } 
         public long ResultCode { get; set; }
     }
 

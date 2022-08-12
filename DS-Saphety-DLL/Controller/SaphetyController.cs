@@ -18,55 +18,71 @@ namespace DS_Saphety_DLL.Controller
         private static HttpClient client = new HttpClient();
         private static PropertiesController properties = new PropertiesController();
         private static String URL_WS = properties.read("AMBIENTE") == "1" ? properties.read("WS_URL_PRUEBAS") : properties.read("WS_URL_PRODUCCION");
+        private static String ACCESS_TOKEN = properties.read("ACCESS_TOKEN");
 
-        /*
-         * TODO JWT Access Token
-         */
-
-
-        /*
-         * Enviar documento soporte
-         */
-        
-        public CreacionDocumentoDTO enviarDocumentoSoporte (DocumentoSoporteDTO documentoSoporteDTO)
+        public TokenDTO getAccessToken (TokenRequestDTO tokenRequestDTO)
         {
             try
             {
-                var task = enviarDocumentoSoporteAsync(documentoSoporteDTO);
+                var task = postAsync(tokenRequestDTO, WS_URL.SOLICITAR_TOKEN);
                 task.Wait();
-                return task.Result;
-            } catch (Exception exception) {
+                var respuestaObj = JsonConvert.DeserializeObject<TokenDTO>(task.Result);
+                validateErrors(respuestaObj);
+                return respuestaObj;
+            }
+            catch (AggregateException exception)
+            {
                 var st = new StackTrace(exception, true);
                 var frame = st.GetFrame(0);
                 var line = frame.GetFileLineNumber();
-                throw new Exception(string.Format("Error en threading al enviar Documento Soporte: ", exception.Message) + "\nStacktrace: [" + st + "]");
+                throw new Exception("[Threading] " + st);
+            }
+            catch
+            {
+                throw;
             }
         }
-        public async Task<CreacionDocumentoDTO> enviarDocumentoSoporteAsync(DocumentoSoporteDTO documentoSoporteDTO)
+
+        public CreacionDocumentoDTO enviarDocumentoSoporte (DocumentoSoporteDTO documentoSoporteDTO)
+        {
+            try {
+                var task = postAsync(documentoSoporteDTO, WS_URL.ENVIAR_DOCUMENTO_SOPORTE);
+                task.Wait();
+                var respuestaObj = JsonConvert.DeserializeObject<CreacionDocumentoDTO>(task.Result);
+                validateErrors(respuestaObj, documentoSoporteDTO.SerieNumber);
+                return respuestaObj;
+            } catch (AggregateException exception) { 
+                var st = new StackTrace(exception, true);
+                var frame = st.GetFrame(0);
+                var line = frame.GetFileLineNumber();
+                throw new Exception("[Threading] " + st);
+            } catch {
+                throw;
+            }
+        }
+
+        private void validateErrors(RespuestaSaphetyDTO respuesta, string serieNumber = "-1")
+        {
+            //TODO Log errors and multiplicity about list of errors
+            if (respuesta.errors != null && respuesta.errors.Count > 0)
+                throw new Exception("[Respuesta Saphety DS " + serieNumber + "]: " + respuesta.errors[0].Description);
+            return;
+        }
+
+        private async Task<string> postAsync(Object requestBodyDTO, WS_URL requestType)
         {
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-            var requestBody = JsonConvert.SerializeObject(documentoSoporteDTO);
-            Uri uri = new Uri(URL_WS + WS_URL.ENVIAR_DOCUMENTO_SOPORTE.getUrl());
-            properties.write("uri", uri.ToString());
-            try
-            { 
-                var response = await client.PostAsync(uri,
-                                        new StringContent(requestBody, Encoding.UTF8, "application/json"));
-                var responseBody = await response.Content.ReadAsStringAsync();
-                var respuestaObj = JsonConvert.DeserializeObject<CreacionDocumentoDTO>(responseBody);
-                return respuestaObj;
+            var requestBody = JsonConvert.SerializeObject(requestBodyDTO);
+            Uri uri = new Uri(URL_WS + requestType.getUrl());
+            try { 
+                var response = await client.PostAsync(uri, new StringContent(requestBody, Encoding.UTF8, "application/json"));
+                return await response.Content.ReadAsStringAsync();
             } catch (Exception ex) {
-                properties.write("Exception", ex.ToString());
+                var st = new StackTrace(ex, true);
+                var frame = st.GetFrame(0);
+                var line = frame.GetFileLineNumber();
+                throw new Exception(string.Format("[Peticion POST] ", ex.Message) + "\nStacktrace: [" + st + "]");
             }
-
-            //response.EnsureSuccessStatusCode();
-
-            return null;
-
-            
-            
         }
-
-
     }
 }

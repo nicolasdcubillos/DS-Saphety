@@ -6,6 +6,20 @@ using System.Threading.Tasks;
 
 namespace DS_Saphety_DLL
 {
+    /*
+     * Token DTO
+     */
+
+    internal class TokenRequestDTO
+    {
+        public String username { get; set; }
+        public String password { get; set; }
+        public String virtual_operator { get; set; }
+    }
+
+    /*
+     * Documento Soporte DTO
+     */
     internal class PaymentMean 
     {
         public String Code { get; set; }
