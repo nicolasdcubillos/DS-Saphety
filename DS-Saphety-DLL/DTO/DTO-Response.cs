@@ -51,7 +51,7 @@ namespace DS_Saphety_DLL
 
     internal class CreacionDocumentoDTO : RespuestaSaphetyDTO
     {
-        public DataCreacionDocumentoDTO ResultData { get; set; }
+        public DataCreacionDocumentoDTO ResultData { get; set; } = new DataCreacionDocumentoDTO();
     }
 
     /*

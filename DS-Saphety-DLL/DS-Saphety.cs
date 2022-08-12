@@ -1,5 +1,5 @@
 ﻿using System.Runtime.InteropServices;
-using Newtonsoft.Json;
+using DS_Saphety_DLL.Controller;
 
 namespace DS_Saphety_DLL
 {
@@ -18,9 +18,10 @@ namespace DS_Saphety_DLL
         [ComVisible(true)]
         public class DSSaphety : DLLInterface
         {
+            private InvoiceController invoiceController = new InvoiceController();
             public string enviarDocumentoSoporte ()
             {
-                return "";
+                return invoiceController.enviarDocumentoSoporte();
             }
         }
     }
