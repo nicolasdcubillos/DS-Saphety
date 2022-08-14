@@ -27,8 +27,8 @@ namespace DS_Saphety_DLL.Controller
 
         public string Read(string Key, string Section = null)
         {
-            var RetVal = new StringBuilder(255);
-            GetPrivateProfileString(Section ?? EXE, Key, "", RetVal, 255, Path);
+            var RetVal = new StringBuilder(1024);
+            GetPrivateProfileString(Section ?? EXE, Key, "", RetVal, 1024, Path);
             return RetVal.ToString();
         }
 

@@ -19,6 +19,7 @@ namespace DS_Saphety_DLL
         public List <WarningErrorDTO> warnings { get; set; }
         public List <WarningErrorDTO> errors { get; set; } 
         public long ResultCode { get; set; }
+        public Object ResultData { get; set; }
     }
 
     /*
@@ -27,7 +28,7 @@ namespace DS_Saphety_DLL
     internal class DataTokenDTO
     {
         public string access_token { get; set; }
-        public DateTime expires { get; set; }
+        public string expires { get; set; }
         public string token_type { get; set; }
     }
 

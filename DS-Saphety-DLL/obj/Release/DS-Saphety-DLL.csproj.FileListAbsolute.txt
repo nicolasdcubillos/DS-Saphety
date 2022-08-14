@@ -1,0 +1,13 @@
+C:\Users\User\Desktop\PERSONAL\DESARROLLOS OFIMATICA\DOCUMENTO SOPORTE - SAPHETY\DS-Saphety\DS-Saphety-DLL\bin\Release\DS-Saphety.dll.config
+C:\Users\User\Desktop\PERSONAL\DESARROLLOS OFIMATICA\DOCUMENTO SOPORTE - SAPHETY\DS-Saphety\DS-Saphety-DLL\bin\Release\DS-Saphety.dll
+C:\Users\User\Desktop\PERSONAL\DESARROLLOS OFIMATICA\DOCUMENTO SOPORTE - SAPHETY\DS-Saphety\DS-Saphety-DLL\bin\Release\DS-Saphety.pdb
+C:\Users\User\Desktop\PERSONAL\DESARROLLOS OFIMATICA\DOCUMENTO SOPORTE - SAPHETY\DS-Saphety\DS-Saphety-DLL\bin\Release\AWSSDK.Core.dll
+C:\Users\User\Desktop\PERSONAL\DESARROLLOS OFIMATICA\DOCUMENTO SOPORTE - SAPHETY\DS-Saphety\DS-Saphety-DLL\bin\Release\Newtonsoft.Json.dll
+C:\Users\User\Desktop\PERSONAL\DESARROLLOS OFIMATICA\DOCUMENTO SOPORTE - SAPHETY\DS-Saphety\DS-Saphety-DLL\bin\Release\AWSSDK.Core.pdb
+C:\Users\User\Desktop\PERSONAL\DESARROLLOS OFIMATICA\DOCUMENTO SOPORTE - SAPHETY\DS-Saphety\DS-Saphety-DLL\bin\Release\AWSSDK.Core.xml
+C:\Users\User\Desktop\PERSONAL\DESARROLLOS OFIMATICA\DOCUMENTO SOPORTE - SAPHETY\DS-Saphety\DS-Saphety-DLL\bin\Release\Newtonsoft.Json.xml
+C:\Users\User\Desktop\PERSONAL\DESARROLLOS OFIMATICA\DOCUMENTO SOPORTE - SAPHETY\DS-Saphety\DS-Saphety-DLL\obj\Release\DS-Saphety-DLL.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\PERSONAL\DESARROLLOS OFIMATICA\DOCUMENTO SOPORTE - SAPHETY\DS-Saphety\DS-Saphety-DLL\obj\Release\DS-Saphety-DLL.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\PERSONAL\DESARROLLOS OFIMATICA\DOCUMENTO SOPORTE - SAPHETY\DS-Saphety\DS-Saphety-DLL\obj\Release\DS-Saphety-DLL.csproj.CopyComplete
+C:\Users\User\Desktop\PERSONAL\DESARROLLOS OFIMATICA\DOCUMENTO SOPORTE - SAPHETY\DS-Saphety\DS-Saphety-DLL\obj\Release\DS-Saphety.dll
+C:\Users\User\Desktop\PERSONAL\DESARROLLOS OFIMATICA\DOCUMENTO SOPORTE - SAPHETY\DS-Saphety\DS-Saphety-DLL\obj\Release\DS-Saphety.pdb

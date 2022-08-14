@@ -20,15 +20,23 @@ namespace DS_Saphety_DLL.Controller
         public Boolean getAccessToken()
         {
             String access_token = null;
-            var expirationDate = DateTime.Parse(properties.read("TOKEN_EXPIRATION"));
+            DateTime expirationDate;
+
+            try {
+                expirationDate = DateTime.Parse(properties.read("TOKEN_EXPIRATION"));
+            } catch {
+                expirationDate = DateTime.Parse("2000-01-01");
+            }
+            
             DateTime actualDate = DateTime.Now;
             if (expirationDate < actualDate) {
                 TokenRequestDTO tokenRequest = new TokenRequestDTO();
                 tokenRequest.username = properties.read("USERNAME");
                 tokenRequest.password = properties.read("PASSWORD");
                 tokenRequest.virtual_operator = properties.read("VIRTUAL_OPERATOR");
+                properties.write("debugTokenRequest", JsonConvert.SerializeObject(tokenRequest));
                 TokenDTO token = saphetyController.getAccessToken(tokenRequest);
-                properties.write("TOKEN_EXPIRATION", token.ResultData.expires.ToString());
+                properties.write("TOKEN_EXPIRATION", token.ResultData.expires);
                 properties.write("ACCESS_TOKEN", token.ResultData.access_token);
                 return true;
             } else {
