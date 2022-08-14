@@ -9,9 +9,9 @@ namespace DS_Saphety_DLL
         public interface DLLInterface
         {
             [DispId(0)]
-            string enviarDocumentoSoporte();
+            string enviarDocumentoSoporte(DocumentoSoporteDTO documentoSoporteDTO);
             [DispId(1)]
-            bool getAccessToken();
+            bool auth(string empresa);
         }
 
         [ComSourceInterfaces(typeof(DLLInterface))]
@@ -21,13 +21,13 @@ namespace DS_Saphety_DLL
         public class DSSaphety : DLLInterface
         {
             private InvoiceController invoiceController = new InvoiceController();
-            public string enviarDocumentoSoporte ()
+            public string enviarDocumentoSoporte (DocumentoSoporteDTO documentoSoporteDTO)
             {
-                return invoiceController.enviarDocumentoSoporte();
+                return invoiceController.enviarDocumentoSoporte(documentoSoporteDTO);
             }
-            public bool getAccessToken()
+            public bool auth(string empresa)
             {
-                return invoiceController.getAccessToken();
+                return invoiceController.auth(empresa);
             }
         }
     }

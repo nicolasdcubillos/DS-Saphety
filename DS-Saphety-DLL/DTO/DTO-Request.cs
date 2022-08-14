@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace DS_Saphety_DLL
      * Token DTO
      */
 
-    internal class TokenRequestDTO
+    public class TokenRequestDTO
     {
         public String username { get; set; }
         public String password { get; set; }
@@ -20,24 +21,24 @@ namespace DS_Saphety_DLL
     /*
      * Documento Soporte DTO
      */
-    internal class PaymentMean 
+    public class PaymentMean 
     {
         public String Code { get; set; }
         public String Mean { get; set; }
         public String DueDate { get; set; }
     }
-    internal class Identification
+    public class Identification
     {
         public String DocumentNumber { get; set; }
         public String DocumentType { get; set; }
         public String CountryCode { get; set; }
         public String CheckDigit { get; set; }
     }
-    internal class CustomerParty
+    public class CustomerParty
     {
         public Identification Identification { get; set; }
     }
-    internal class Address
+    public class Address
     {
         public String DepartmentCode { get; set; }
         public String CityCode { get; set; }
@@ -45,7 +46,7 @@ namespace DS_Saphety_DLL
         public String PostalCode { get; set; }
         public String Country { get; set; }
     }
-    internal class SupplierParty
+    public class SupplierParty
     {
         public String LegalType { get; set; }
         public String Email { get; set; }
@@ -55,30 +56,30 @@ namespace DS_Saphety_DLL
         public Identification Identification { get; set; }
         public Address Address { get; set; }
     }
-    internal class TaxSubtotal
+    public class TaxSubtotal
     {
         public String TaxCategory { get; set; }
         public String TaxPercentage { get; set; }
         public String TaxableAmount { get; set; }
         public String TaxAmount { get; set; }
     }
-    internal class TaxTotal
+    public class TaxTotal
     {
         public String TaxCategory { get; set; }
         public String TaxAmount { get; set; }
         public String RoundingAmount { get; set; }
     }
-    internal class Item
+    public class Item
     {
         public String Gtin { get; set; }
         public String Description { get; set; }
     }
-    internal class InvoicePeriod
+    public class InvoicePeriod
     {
         public String From { get; set; }
         public String DescriptionCode { get; set; }
     }
-    internal class Line
+    public class Line
     {
         public String Number { get; set; }
         public String Quantity { get; set; }
@@ -91,14 +92,18 @@ namespace DS_Saphety_DLL
         public Item Item { get; set; }
         public InvoicePeriod InvoicePeriod { get; set; }
     }
-    internal class Total
+    public class Total
     {
         public String GrossAmount { get; set; }
         public String TotalBillableAmount { get; set; }
         public String PayableAmount { get; set; }
         public String TaxableAmount { get; set; }
     }
-    internal class DocumentoSoporteDTO
+
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("DocumentoSoporteDTO.Class")]
+    [ComVisible(true)]
+    public class DocumentoSoporteDTO
     {
         public String Currency { get; set; }
         public String SeriePrefix { get; set; }

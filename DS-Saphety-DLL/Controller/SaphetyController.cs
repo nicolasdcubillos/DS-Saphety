@@ -22,9 +22,7 @@ namespace DS_Saphety_DLL.Controller
         private static String ACCESS_TOKEN = properties.read("ACCESS_TOKEN");
         public SaphetyController()
         {
-            //client.DefaultRequestHeaders.Add("Authorization", "Bearer ");
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ACCESS_TOKEN);
-
         }
         public TokenDTO getAccessToken (TokenRequestDTO tokenRequestDTO)
         {

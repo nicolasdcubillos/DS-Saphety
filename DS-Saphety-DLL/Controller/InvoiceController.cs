@@ -11,13 +11,17 @@ namespace DS_Saphety_DLL.Controller
     {
         private SaphetyController saphetyController = new SaphetyController();
         private PropertiesController properties = new PropertiesController();
-        public String enviarDocumentoSoporte ()
+        private List<string> empresasAutorizadas = new List<string>();
+        public InvoiceController ()
         {
-            DocumentoSoporteDTO documentoSoporteDTO = new DocumentoSoporteDTO ();
+            empresasAutorizadas.Add("860010268-1");
+        }
+        public String enviarDocumentoSoporte (DocumentoSoporteDTO documentoSoporteDTO)
+        {
             CreacionDocumentoDTO respuesta = saphetyController.enviarDocumentoSoporte(documentoSoporteDTO);
             return respuesta.ResultData.id;
         }
-        public Boolean getAccessToken()
+        private Boolean getAccessToken()
         {
             String access_token = null;
             DateTime expirationDate;
@@ -34,7 +38,6 @@ namespace DS_Saphety_DLL.Controller
                 tokenRequest.username = properties.read("USERNAME");
                 tokenRequest.password = properties.read("PASSWORD");
                 tokenRequest.virtual_operator = properties.read("VIRTUAL_OPERATOR");
-                properties.write("debugTokenRequest", JsonConvert.SerializeObject(tokenRequest));
                 TokenDTO token = saphetyController.getAccessToken(tokenRequest);
                 properties.write("TOKEN_EXPIRATION", token.ResultData.expires);
                 properties.write("ACCESS_TOKEN", token.ResultData.access_token);
@@ -43,6 +46,10 @@ namespace DS_Saphety_DLL.Controller
                 access_token = properties.read("ACCESS_TOKEN");
             }
             return true;
+        }
+        public Boolean auth(string empresa)
+        {
+            return empresasAutorizadas.Contains(empresa) == true ? getAccessToken() : false;
         }
     }
 }
