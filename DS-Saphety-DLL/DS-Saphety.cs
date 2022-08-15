@@ -12,6 +12,8 @@ namespace DS_Saphety_DLL
             string enviarDocumentoSoporte(DocumentoSoporteDTO documentoSoporteDTO);
             [DispId(1)]
             bool auth(string empresa);
+            [DispId(2)]
+            string prueba(object o);
         }
 
         [ComSourceInterfaces(typeof(DLLInterface))]
@@ -28,6 +30,10 @@ namespace DS_Saphety_DLL
             public bool auth(string empresa)
             {
                 return invoiceController.auth(empresa);
+            }
+            public string prueba(object o)
+            {
+                return o.GetType().Name;
             }
         }
     }

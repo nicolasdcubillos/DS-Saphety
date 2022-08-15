@@ -19,8 +19,7 @@ namespace DS_Saphety_DLL.Controller
         private static HttpClient client = new HttpClient();
         private static PropertiesController properties = new PropertiesController();
         private static String URL_WS = properties.read("AMBIENTE") == "1" ? properties.read("WS_URL_PRUEBAS") : properties.read("WS_URL_PRODUCCION");
-        private static String ACCESS_TOKEN = properties.read("ACCESS_TOKEN");
-        public SaphetyController()
+        public void setToken(string ACCESS_TOKEN)
         {
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ACCESS_TOKEN);
         }
@@ -59,8 +58,10 @@ namespace DS_Saphety_DLL.Controller
         private void validateErrors(RespuestaSaphetyDTO respuesta, string serieNumber = "-1")
         {
             //TODO Log errors and multiplicity about list of errors
-            if (respuesta.errors != null && respuesta.errors.Count > 0)
-                throw new Exception("[Respuesta Saphety DS " + serieNumber + "]: " + JsonConvert.SerializeObject(respuesta.errors[0]));
+            if (respuesta.errors != null && respuesta.errors.Count > 0) {
+                properties.write("errorCapturado", JsonConvert.SerializeObject(respuesta.errors));
+                throw new Exception("[Respuesta Saphety DS " + serieNumber.Trim() + "]: " + JsonConvert.SerializeObject(respuesta.errors));
+            }
             return;
         }
 
@@ -68,12 +69,11 @@ namespace DS_Saphety_DLL.Controller
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
             var requestBody = JsonConvert.SerializeObject(requestBodyDTO);
-            properties.write("poniendoaccesstoken", ACCESS_TOKEN);
-            properties.write("last", requestBody);
+            properties.write("debugRequestBody", requestBody);
             Uri uri = new Uri(URL_WS + requestType.getUrl());
             try { 
                 var response = await client.PostAsync(uri, new StringContent(requestBody, Encoding.UTF8, "application/json"));
-                properties.write("debugresponse", JsonConvert.SerializeObject(response));
+                properties.write("debugLastResponse", JsonConvert.SerializeObject(response));
                 return await response.Content.ReadAsStringAsync();
             } catch (Exception ex) {
                 var st = new StackTrace(ex, true);

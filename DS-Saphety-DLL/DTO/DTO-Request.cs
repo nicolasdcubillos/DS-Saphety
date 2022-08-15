@@ -21,6 +21,10 @@ namespace DS_Saphety_DLL
     /*
      * Documento Soporte DTO
      */
+
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("PaymentMean.Class")]
+    [ComVisible(true)]
     public class PaymentMean 
     {
         public String Code { get; set; }
@@ -36,7 +40,8 @@ namespace DS_Saphety_DLL
     }
     public class CustomerParty
     {
-        public Identification Identification { get; set; }
+        public CustomerParty() { }
+        public Identification Identification { get; set; } = new Identification();
     }
     public class Address
     {
@@ -53,8 +58,8 @@ namespace DS_Saphety_DLL
         public String TaxScheme { get; set; }
         public List<String> ResponsabilityTypes { get; set; } = new List<String>();
         public String name { get; set; }
-        public Identification Identification { get; set; }
-        public Address Address { get; set; }
+        public Identification Identification { get; set; } = new Identification();
+        public Address Address { get; set; } = new Address();
     }
     public class TaxSubtotal
     {
@@ -89,8 +94,8 @@ namespace DS_Saphety_DLL
         public String UnitPrice { get; set; }
         public String GrossAmount { get; set; }
         public String NetAmount { get; set; }
-        public Item Item { get; set; }
-        public InvoicePeriod InvoicePeriod { get; set; }
+        public Item Item { get; set; } = new Item();
+        public InvoicePeriod InvoicePeriod { get; set; } = new InvoicePeriod();
     }
     public class Total
     {
@@ -115,12 +120,34 @@ namespace DS_Saphety_DLL
         public String CorrelationDocumentId { get; set; }
         public String SerieExternalKey { get; set; }
         public List<PaymentMean> PaymentMeans { get; set; } = new List<PaymentMean>();
-        public CustomerParty CustomerParty { get; set; }
-        public SupplierParty SupplierParty { get; set; }
+        public CustomerParty CustomerParty { get; set; } = new CustomerParty();
+        public SupplierParty SupplierParty { get; set; } = new SupplierParty();
         public List<Line> Lines { get; set; } = new List<Line>();
         public List<TaxSubtotal> TaxSubtotals { get; set; } = new List<TaxSubtotal>();
         public List<TaxTotal> TaxTotals { get; set; } = new List<TaxTotal>();
         public Total Total { get; set; }
         public List<String> Notes { get; set; } = new List<String>();
+        
+        [DispId(0)]
+        public void addPaymentMean(PaymentMean paymentMean)
+        {
+            this.PaymentMeans.Add(paymentMean);
+        }
+
+        [DispId(1)]
+        public void addLine (Line line)
+        {
+            this.Lines.Add(line);
+        }
+        [DispId(2)]
+        public void addTaxSubtotal(TaxSubtotal taxSubtotal)
+        {
+            this.TaxSubtotals.Add(taxSubtotal);
+        }
+        [DispId(3)]
+        public void addTaxTotal(TaxTotal taxTotal)
+        {
+            this.TaxTotals.Add(taxTotal);
+        }
     }
 }

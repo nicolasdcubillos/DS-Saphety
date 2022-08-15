@@ -9,15 +9,17 @@ namespace DS_Saphety_DLL.Controller
 {
     internal class InvoiceController
     {
-        private SaphetyController saphetyController = new SaphetyController();
-        private PropertiesController properties = new PropertiesController();
-        private List<string> empresasAutorizadas = new List<string>();
+        private static SaphetyController saphetyController = new SaphetyController();
+        private static PropertiesController properties = new PropertiesController();
+        private static List<string> empresasAutorizadas = new List<string>();
+        private static String SERIE_EXTERNAL_KEY = properties.read("SERIE_EXTERNAL_KEY");
         public InvoiceController ()
         {
             empresasAutorizadas.Add("860010268-1");
         }
         public String enviarDocumentoSoporte (DocumentoSoporteDTO documentoSoporteDTO)
         {
+            documentoSoporteDTO.SerieExternalKey = SERIE_EXTERNAL_KEY;
             CreacionDocumentoDTO respuesta = saphetyController.enviarDocumentoSoporte(documentoSoporteDTO);
             return respuesta.ResultData.id;
         }
@@ -41,10 +43,10 @@ namespace DS_Saphety_DLL.Controller
                 TokenDTO token = saphetyController.getAccessToken(tokenRequest);
                 properties.write("TOKEN_EXPIRATION", token.ResultData.expires);
                 properties.write("ACCESS_TOKEN", token.ResultData.access_token);
-                return true;
             } else {
                 access_token = properties.read("ACCESS_TOKEN");
             }
+            saphetyController.setToken(access_token);
             return true;
         }
         public Boolean auth(string empresa)
