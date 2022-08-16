@@ -16,6 +16,8 @@ namespace DS_Saphety_DLL.Controller
         public InvoiceController ()
         {
             empresasAutorizadas.Add("860010268-1");
+            empresasAutorizadas.Add("800145400-8");
+            empresasAutorizadas.Add("900141348-7");
         }
         public String enviarDocumentoSoporte (DocumentoSoporteDTO documentoSoporteDTO)
         {
@@ -52,6 +54,36 @@ namespace DS_Saphety_DLL.Controller
         public Boolean auth(string empresa)
         {
             return empresasAutorizadas.Contains(empresa) == true ? getAccessToken() : false;
+        }
+
+        public Boolean saveConfig (ConfiguracionDTO configuracion)
+        {
+            try {
+                properties.write("PATH", configuracion.PATH);
+                properties.write("WS_URL_PRUEBAS", configuracion.WS_URL_PRUEBAS);
+                properties.write("WS_URL_PRODUCCION", configuracion.WS_URL_PRODUCCION);
+                properties.write("AMBIENTE", configuracion.AMBIENTE);
+                properties.write("VIRTUAL_OPERATOR", configuracion.VIRTUAL_OPERATOR);
+                properties.write("USERNAME", configuracion.USERNAME);
+                properties.write("PASSWORD", configuracion.PASSWORD);
+                properties.write("SERIE_EXTERNAL_KEY", configuracion.SERIE_EXTERNAL_KEY);
+                return true;
+            } catch {
+                return false;
+            }
+        }
+        public ConfiguracionDTO loadConfig ()
+        {
+            ConfiguracionDTO configuracion = new ConfiguracionDTO();
+            configuracion.PATH = properties.read("PATH");
+            configuracion.WS_URL_PRUEBAS = properties.read("WS_URL_PRUEBAS");
+            configuracion.WS_URL_PRODUCCION = properties.read("WS_URL_PRODUCCION");
+            configuracion.AMBIENTE = properties.read("AMBIENTE");
+            configuracion.VIRTUAL_OPERATOR = properties.read("VIRTUAL_OPERATOR");
+            configuracion.USERNAME = properties.read("USERNAME");
+            configuracion.PASSWORD = properties.read("PASSWORD");
+            configuracion.SERIE_EXTERNAL_KEY = properties.read("SERIE_EXTERNAL_KEY");
+            return configuracion;
         }
     }
 }

@@ -79,6 +79,7 @@ namespace DS_Saphety_DLL.Controller
                 var st = new StackTrace(ex, true);
                 var frame = st.GetFrame(0);
                 var line = frame.GetFileLineNumber();
+                properties.write("exceptiontask", string.Format("[Peticion POST] ", ex.Message) + "\nStacktrace: [" + st + "]");
                 throw new Exception(string.Format("[Peticion POST] ", ex.Message) + "\nStacktrace: [" + st + "]");
             }
         }

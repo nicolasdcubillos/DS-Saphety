@@ -1,12 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DS_Saphety_DLL
 {
+    /*
+     * Configuracion DTO
+     */
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("ConfiguracionDTO.Class")]
+    [ComVisible(true)]
+    public class ConfiguracionDTO
+    {
+        public String PATH { get; set; }
+        public String WS_URL_PRUEBAS { get; set; }
+        public String WS_URL_PRODUCCION { get; set; }
+        public String AMBIENTE { get; set; }
+        public String VIRTUAL_OPERATOR { get; set; }
+        public String USERNAME { get; set; }
+        public String PASSWORD { get; set; }
+        public String SERIE_EXTERNAL_KEY { get; set; }
+    }
+
     /*
      * Token DTO
      */
@@ -31,6 +46,9 @@ namespace DS_Saphety_DLL
         public String Mean { get; set; }
         public String DueDate { get; set; }
     }
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("Identification.Class")]
+    [ComVisible(true)]
     public class Identification
     {
         public String DocumentNumber { get; set; }
@@ -38,11 +56,18 @@ namespace DS_Saphety_DLL
         public String CountryCode { get; set; }
         public String CheckDigit { get; set; }
     }
+
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("CustomerParty.Class")]
+    [ComVisible(true)]
     public class CustomerParty
     {
-        public CustomerParty() { }
         public Identification Identification { get; set; } = new Identification();
     }
+
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("Address.Class")]
+    [ComVisible(true)]
     public class Address
     {
         public String DepartmentCode { get; set; }
@@ -51,6 +76,10 @@ namespace DS_Saphety_DLL
         public String PostalCode { get; set; }
         public String Country { get; set; }
     }
+
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("SupplierParty.Class")]
+    [ComVisible(true)]
     public class SupplierParty
     {
         public String LegalType { get; set; }
@@ -60,6 +89,11 @@ namespace DS_Saphety_DLL
         public String name { get; set; }
         public Identification Identification { get; set; } = new Identification();
         public Address Address { get; set; } = new Address();
+        [DispId(0)]
+        public void addResponsabilityType (String responsabilityType)
+        {
+            this.ResponsabilityTypes.Add(responsabilityType);
+        }
     }
     public class TaxSubtotal
     {

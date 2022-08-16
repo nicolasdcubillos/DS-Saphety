@@ -13,7 +13,9 @@ namespace DS_Saphety_DLL
             [DispId(1)]
             bool auth(string empresa);
             [DispId(2)]
-            string prueba(object o);
+            bool saveConfig(ConfiguracionDTO configuracionDTO);
+            [DispId(3)]
+            ConfiguracionDTO loadConfig();
         }
 
         [ComSourceInterfaces(typeof(DLLInterface))]
@@ -31,9 +33,13 @@ namespace DS_Saphety_DLL
             {
                 return invoiceController.auth(empresa);
             }
-            public string prueba(object o)
+            public bool saveConfig(ConfiguracionDTO configuracionDTO)
             {
-                return o.GetType().Name;
+                return invoiceController.saveConfig(configuracionDTO);
+            }
+            public ConfiguracionDTO loadConfig()
+            {
+                return invoiceController.loadConfig();
             }
         }
     }
