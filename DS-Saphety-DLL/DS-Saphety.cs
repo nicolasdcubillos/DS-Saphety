@@ -37,7 +37,7 @@ namespace DS_Saphety_DLL
             {
                 return invoiceController.saveConfig(configuracionDTO);
             }
-            public ConfiguracionDTO loadConfig()
+            public ConfiguracionDTO loadConfig() 
             {
                 return invoiceController.loadConfig();
             }

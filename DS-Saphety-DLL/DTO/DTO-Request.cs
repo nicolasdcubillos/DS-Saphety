@@ -19,7 +19,6 @@ namespace DS_Saphety_DLL
         public String VIRTUAL_OPERATOR { get; set; }
         public String USERNAME { get; set; }
         public String PASSWORD { get; set; }
-        public String SERIE_EXTERNAL_KEY { get; set; }
     }
 
     /*
@@ -40,7 +39,7 @@ namespace DS_Saphety_DLL
     [ClassInterface(ClassInterfaceType.AutoDual)]
     [ProgId("PaymentMean.Class")]
     [ComVisible(true)]
-    public class PaymentMean 
+    public class PaymentMean
     {
         public String Code { get; set; }
         public String Mean { get; set; }
@@ -90,7 +89,7 @@ namespace DS_Saphety_DLL
         public Identification Identification { get; set; } = new Identification();
         public Address Address { get; set; } = new Address();
         [DispId(0)]
-        public void addResponsabilityType (String responsabilityType)
+        public void addResponsabilityType(String responsabilityType)
         {
             this.ResponsabilityTypes.Add(responsabilityType);
         }
@@ -108,6 +107,9 @@ namespace DS_Saphety_DLL
         public String TaxAmount { get; set; }
         public String RoundingAmount { get; set; }
     }
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("Item.Class")]
+    [ComVisible(true)]
     public class Item
     {
         public String Gtin { get; set; }
@@ -118,6 +120,9 @@ namespace DS_Saphety_DLL
         public String From { get; set; }
         public String DescriptionCode { get; set; }
     }
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("Line.Class")]
+    [ComVisible(true)]
     public class Line
     {
         public String Number { get; set; }

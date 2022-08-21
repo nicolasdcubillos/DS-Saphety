@@ -10,18 +10,20 @@ namespace DS_Saphety_DLL.Controller
 {
     internal class PropertiesController
     {
-        private static string outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
-        private static string iconPath = Path.Combine(outPutDirectory, "Utils/settingsDS.ini");
-        private static string path = new Uri(iconPath).LocalPath; 
+        private static string principalPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
+        private static string settingsPath = Path.Combine(principalPath, "Utils/settingsDS.ini");
+        private static string path = new Uri(settingsPath).LocalPath; 
         private static IniFile file = new IniFile(path);
-        public void write (String key, String value)
+        public PropertiesController ()
         {
-            file.Write(key, value);
+            try {
+                principalPath = this.read("path");
+            } catch {
+                principalPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase) + "\\DocumentosSoporte\\";
+                this.write("path", principalPath);
+            }
         }
-
-        public String read(String key)
-        {
-            return file.Read(key);
-        }
+        public void write (String key, String value) { file.Write(key, value); }
+        public String read(String key) { return file.Read(key); }
     }
 }
