@@ -94,6 +94,9 @@ namespace DS_Saphety_DLL
             this.ResponsabilityTypes.Add(responsabilityType);
         }
     }
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("TaxSubtotal.Class")]
+    [ComVisible(true)]
     public class TaxSubtotal
     {
         public String TaxCategory { get; set; }
@@ -101,6 +104,9 @@ namespace DS_Saphety_DLL
         public String TaxableAmount { get; set; }
         public String TaxAmount { get; set; }
     }
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("TaxTotal.Class")]
+    [ComVisible(true)]
     public class TaxTotal
     {
         public String TaxCategory { get; set; }
@@ -115,6 +121,9 @@ namespace DS_Saphety_DLL
         public String Gtin { get; set; }
         public String Description { get; set; }
     }
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("InvoicePeriod.Class")]
+    [ComVisible(true)]
     public class InvoicePeriod
     {
         public String From { get; set; }
@@ -135,7 +144,21 @@ namespace DS_Saphety_DLL
         public String NetAmount { get; set; }
         public Item Item { get; set; } = new Item();
         public InvoicePeriod InvoicePeriod { get; set; } = new InvoicePeriod();
+        [DispId(0)]
+        public void addTaxSubtotal(TaxSubtotal taxSubtotal)
+        {
+            this.TaxSubtotals.Add(taxSubtotal);
+        }
+        [DispId(1)]
+        public void addTaxTotal(TaxTotal taxTotal)
+        {
+            this.TaxTotals.Add(taxTotal);
+        }
     }
+
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("Total.Class")]
+    [ComVisible(true)]
     public class Total
     {
         public String GrossAmount { get; set; }
