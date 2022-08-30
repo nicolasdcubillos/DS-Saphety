@@ -44,6 +44,7 @@ namespace DS_Saphety_DLL
     {
         public string id { get; set; }
         public string CorrelationDocumentId { get; set; }
+        public string CUFE { get; set; }
         public string Content { get; set; }
         public string ContentType { get; set; }
     }

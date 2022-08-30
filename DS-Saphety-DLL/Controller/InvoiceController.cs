@@ -36,7 +36,7 @@ namespace DS_Saphety_DLL.Controller
                         writeErrorInLog(documentoSoporteDTO.CorrelationDocumentId, errorMessage);
                     }
                     return "ERROR";
-                } else return respuesta.ResultData.id;
+                } else return respuesta.ResultData.CUFE;
             } catch (Exception ex) {
                 var st = new StackTrace(ex, true);
                 var frame = st.GetFrame(0);
