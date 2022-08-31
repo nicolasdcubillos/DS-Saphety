@@ -18,7 +18,11 @@ namespace DS_Saphety_DLL.Controller
     {
         private static HttpClient client = new HttpClient();
         private static PropertiesController properties = new PropertiesController();
-        private static String URL_WS = properties.read("AMBIENTE") == "1" ? properties.read("WS_URL_PRUEBAS") : properties.read("WS_URL_PRODUCCION");
+        private static String URL_WS;
+        public SaphetyController ()
+        {
+            URL_WS = properties.read("AMBIENTE") == "1" ? properties.read("WS_URL_PRUEBAS") : properties.read("WS_URL_PRODUCCION");
+        }
         public void setToken(string ACCESS_TOKEN)
         {
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ACCESS_TOKEN);

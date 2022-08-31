@@ -70,7 +70,9 @@ namespace DS_Saphety_DLL
     public class Address
     {
         public String DepartmentCode { get; set; }
+        public string DepartmentName { get; set; }
         public String CityCode { get; set; }
+        public String CityName { get; set; }
         public String AddressLine { get; set; }
         public String PostalCode { get; set; }
         public String Country { get; set; }

@@ -61,7 +61,7 @@ T.FECHA BETWEEN @fecha1 AND @fecha2
 	Función VS_DATOSPROVEEDOR
 	Retorna la información del proveedor del Documento Soporte.
 	
-	SELECT * FROM DS_DATOSPROVEEDOR('80168391-8 ')
+	SELECT * FROM DS_DATOSPROVEEDOR('444444304-0')
 */
 
 GO

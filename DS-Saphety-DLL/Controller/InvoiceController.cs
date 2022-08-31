@@ -85,12 +85,12 @@ namespace DS_Saphety_DLL.Controller
         {
             try {
                 properties.write("PATH", configuracion.PATH);
-                properties.write("WS_URL_PRUEBAS", configuracion.WS_URL_PRUEBAS);
-                properties.write("WS_URL_PRODUCCION", configuracion.WS_URL_PRODUCCION);
                 properties.write("AMBIENTE", configuracion.AMBIENTE);
                 properties.write("VIRTUAL_OPERATOR", configuracion.VIRTUAL_OPERATOR);
                 properties.write("USERNAME", configuracion.USERNAME);
                 properties.write("PASSWORD", configuracion.PASSWORD);
+                properties.write("ACCESS_TOKEN", "");
+                properties.write("TOKEN_EXPIRATION", "");
                 return true;
             } catch {
                 return false;
