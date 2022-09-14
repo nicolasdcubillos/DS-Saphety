@@ -21,6 +21,7 @@ namespace DS_Saphety_DLL
         public String USERNAME { get; set; }
         public String PASSWORD { get; set; }
         public String TIPO_DCTO { get; set; }
+        public String NOTA_AJUSTE { get; set; }
     }
 
     /*

@@ -90,6 +90,7 @@ namespace DS_Saphety_DLL.Controller
                 properties.write("USERNAME", configuracion.USERNAME);
                 properties.write("PASSWORD", configuracion.PASSWORD);
                 properties.write("TIPO_DCTO", configuracion.TIPO_DCTO);
+                properties.write("NOTA_AJUSTE", configuracion.NOTA_AJUSTE);
                 properties.write("ACCESS_TOKEN", "");
                 properties.write("TOKEN_EXPIRATION", "");
                 return true;
@@ -107,6 +108,7 @@ namespace DS_Saphety_DLL.Controller
             configuracion.USERNAME = properties.read("USERNAME");
             configuracion.PASSWORD = properties.read("PASSWORD");
             configuracion.TIPO_DCTO = properties.read("TIPO_DCTO");
+            configuracion.NOTA_AJUSTE = properties.read("NOTA_AJUSTE");
             return configuracion;
         }
         private void saveDoc (DocumentoSoporteDTO documento) {
