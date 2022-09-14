@@ -89,6 +89,7 @@ namespace DS_Saphety_DLL.Controller
                 properties.write("VIRTUAL_OPERATOR", configuracion.VIRTUAL_OPERATOR);
                 properties.write("USERNAME", configuracion.USERNAME);
                 properties.write("PASSWORD", configuracion.PASSWORD);
+                properties.write("TIPO_DCTO", configuracion.TIPO_DCTO);
                 properties.write("ACCESS_TOKEN", "");
                 properties.write("TOKEN_EXPIRATION", "");
                 return true;
@@ -105,6 +106,7 @@ namespace DS_Saphety_DLL.Controller
             configuracion.VIRTUAL_OPERATOR = properties.read("VIRTUAL_OPERATOR");
             configuracion.USERNAME = properties.read("USERNAME");
             configuracion.PASSWORD = properties.read("PASSWORD");
+            configuracion.TIPO_DCTO = properties.read("TIPO_DCTO");
             return configuracion;
         }
         private void saveDoc (DocumentoSoporteDTO documento) {

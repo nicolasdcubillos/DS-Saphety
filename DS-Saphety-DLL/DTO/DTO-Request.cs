@@ -7,6 +7,7 @@ namespace DS_Saphety_DLL
     /*
      * Configuracion DTO
      */
+
     [ClassInterface(ClassInterfaceType.AutoDual)]
     [ProgId("ConfiguracionDTO.Class")]
     [ComVisible(true)]
@@ -19,6 +20,7 @@ namespace DS_Saphety_DLL
         public String VIRTUAL_OPERATOR { get; set; }
         public String USERNAME { get; set; }
         public String PASSWORD { get; set; }
+        public String TIPO_DCTO { get; set; }
     }
 
     /*

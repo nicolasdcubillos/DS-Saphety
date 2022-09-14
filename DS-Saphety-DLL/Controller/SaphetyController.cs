@@ -61,11 +61,9 @@ namespace DS_Saphety_DLL.Controller
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
             var requestBody = JsonConvert.SerializeObject(requestBodyDTO);
-            properties.write("debugRequestBody", requestBody);
             Uri uri = new Uri(URL_WS + requestType.getUrl());
             try { 
                 var response = await client.PostAsync(uri, new StringContent(requestBody, Encoding.UTF8, "application/json"));
-                properties.write("debugLastResponsee", JsonConvert.SerializeObject(response));
                 return await response.Content.ReadAsStringAsync();
             } catch (Exception ex) {
                 var st = new StackTrace(ex, true);
