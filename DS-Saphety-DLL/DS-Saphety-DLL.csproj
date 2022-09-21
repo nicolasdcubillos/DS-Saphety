@@ -20,7 +20,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>.\</OutputPath>
+    <OutputPath>DLL\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -42,14 +42,14 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Utils\key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Utils\WS-URLS.cs" />
-    <Compile Include="Utils\IniFile.cs" />
+    <Compile Include="Controller\WS-URLS.cs" />
+    <Compile Include="Controller\IniFile.cs" />
     <Compile Include="Controller\PropertiesController.cs" />
     <Compile Include="Controller\SaphetyController.cs" />
     <Compile Include="Controller\InvoiceController.cs" />
@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="key.snk" />
+    <None Include="Utils\key.snk" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

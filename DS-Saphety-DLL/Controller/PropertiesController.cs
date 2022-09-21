@@ -11,7 +11,7 @@ namespace DS_Saphety_DLL.Controller
     internal class PropertiesController
     {
         private static string principalPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
-        private static string settingsPath = Path.Combine(principalPath, "Utils/settingsDS.ini");
+        private static string settingsPath = Path.Combine(principalPath, "../Utils/settingsDS.ini");
         private static string path = new Uri(settingsPath).LocalPath; 
         private static IniFile file = new IniFile(path);
         public PropertiesController ()
