@@ -45,6 +45,37 @@ namespace DS_Saphety_DLL.Controller
                 return "ERROR";
             }
         }
+
+        public String enviarAjusteDocumento (DocumentoSoporteAjusteDTO documentoSoporteAjusteDTO)
+        {
+            try
+            {
+                saveDoc(documentoSoporteAjusteDTO);
+                CreacionDocumentoDTO respuesta = saphetyController.enviarAjusteDocumento(documentoSoporteAjusteDTO);
+                if (respuesta.errors.Count > 0)
+                {
+                    foreach (WarningErrorDTO error in respuesta.errors)
+                    {
+                        String errorMessage = " - Field: " + error.Field
+                                          + "\n - Code: " + error.Code
+                                          + "\n - Description: " + error.Description;
+                        foreach (String st in error.ExplanationValues)
+                        {
+                            errorMessage += "\n - Explanation Value: " + st;
+                        }
+                        writeErrorInLog(documentoSoporteAjusteDTO.CorrelationDocumentId, errorMessage);
+                    }
+                    return "ERROR";
+                }
+                else return respuesta.ResultData.CUFE;
+            } catch (Exception ex) {
+                var st = new StackTrace(ex, true);
+                var frame = st.GetFrame(0);
+                var line = frame.GetFileLineNumber();
+                writeErrorInLog(documentoSoporteAjusteDTO.CorrelationDocumentId, "(" + ex + ") " + st.ToString());
+                return "ERROR";
+            }
+        }
         private Boolean getAccessToken()
         {
             String access_token = null;
@@ -118,5 +149,6 @@ namespace DS_Saphety_DLL.Controller
             File.WriteAllText(path + documento.SeriePrefix + documento.SerieNumber + "-" + documento.CorrelationDocumentId + ".json", json);
         }       
         private void validatePath (string path) { if (!Directory.Exists(path)) { Directory.CreateDirectory(path); } }
+ 
     }
 }

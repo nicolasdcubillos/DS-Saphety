@@ -29,6 +29,10 @@ namespace DS_Saphety_DLL
             {
                 return invoiceController.enviarDocumentoSoporte(documentoSoporteDTO);
             }
+            public string enviarAjusteDocumento (DocumentoSoporteAjusteDTO documentoSoporteAjusteDTO)
+            {
+                return invoiceController.enviarAjusteDocumento(documentoSoporteAjusteDTO);
+            }
             public bool auth(string empresa)
             {
                 return invoiceController.auth(empresa);

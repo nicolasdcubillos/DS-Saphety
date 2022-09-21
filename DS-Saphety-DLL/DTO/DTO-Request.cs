@@ -217,4 +217,9 @@ namespace DS_Saphety_DLL
             this.TaxTotals.Add(taxTotal);
         }
     }
+
+    public class DocumentoSoporteAjusteDTO : DocumentoSoporteDTO
+    {
+
+    }
 }

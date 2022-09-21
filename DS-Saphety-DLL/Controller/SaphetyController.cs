@@ -57,6 +57,25 @@ namespace DS_Saphety_DLL.Controller
             } catch { throw; }
         }
 
+        public CreacionDocumentoDTO enviarAjusteDocumento (DocumentoSoporteAjusteDTO documentoSoporteAjusteDTO)
+        {
+            try
+            {
+                var task = postAsync(documentoSoporteAjusteDTO, WS_URL.ENVIAR_AJUSTE_DOCUMENTO);
+                task.Wait();
+                var respuestaObj = JsonConvert.DeserializeObject<CreacionDocumentoDTO>(task.Result);
+                return respuestaObj;
+            }
+            catch (AggregateException exception)
+            {
+                var st = new StackTrace(exception, true);
+                var frame = st.GetFrame(0);
+                var line = frame.GetFileLineNumber();
+                throw new Exception("[Threading] " + st);
+            }
+            catch { throw; }
+        }
+
         private async Task<string> postAsync(Object requestBodyDTO, WS_URL requestType)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;

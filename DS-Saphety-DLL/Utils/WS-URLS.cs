@@ -11,7 +11,7 @@ namespace DS_Saphety_DLL.Utils
     {
         SOLICITAR_TOKEN,
         ENVIAR_DOCUMENTO_SOPORTE,
-        CONSULTAR_DOCUMENTO_SOPORTE
+        ENVIAR_AJUSTE_DOCUMENTO
     }
 
     public static class WS_URLS_EXTENSIONS
@@ -27,8 +27,8 @@ namespace DS_Saphety_DLL.Utils
                     return version + "auth/gettoken";
                 case WS_URL.ENVIAR_DOCUMENTO_SOPORTE:
                     return version + virtualOperator + "outbounddocuments/supportDocument";
-                case WS_URL.CONSULTAR_DOCUMENTO_SOPORTE:
-                    return "";
+                case WS_URL.ENVIAR_AJUSTE_DOCUMENTO:
+                    return version + virtualOperator + "outbounddocuments/supportDocumentAdjust";
                 default:
                     return null;
             }
