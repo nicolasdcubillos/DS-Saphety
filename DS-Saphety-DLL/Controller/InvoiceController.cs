@@ -21,23 +21,21 @@ namespace DS_Saphety_DLL.Controller
             empresasAutorizadas.Add("800145400-8");
             empresasAutorizadas.Add("900141348-7");
         }
-        public String enviarDocumentoSoporte (DocumentoSoporteDTO documentoSoporteDTO) { 
-            try {
-                saveDoc(documentoSoporteDTO); 
+        public String enviarDocumentoSoporte(DocumentoSoporteDTO documentoSoporteDTO)
+        {
+            try
+            {
+                saveDoc(documentoSoporteDTO);
                 CreacionDocumentoDTO respuesta = saphetyController.enviarDocumentoSoporte(documentoSoporteDTO);
-                if (respuesta.errors.Count > 0) {
-                    foreach (WarningErrorDTO error in respuesta.errors) {
-                        String errorMessage = " - Field: " + error.Field
-                                          + "\n - Code: " + error.Code
-                                          + "\n - Description: " + error.Description;
-                        foreach (String st in error.ExplanationValues) {
-                            errorMessage += "\n - Explanation Value: " + st;
-                        }
-                        writeErrorInLog(documentoSoporteDTO.CorrelationDocumentId, errorMessage);
-                    }
+                if (respuesta.errors.Count > 0)
+                {
+                    catchErrors(respuesta.errors, documentoSoporteDTO.CorrelationDocumentId);
                     return "ERROR";
-                } else return respuesta.ResultData.CUFE;
-            } catch (Exception ex) {
+                }
+                else return respuesta.ResultData.CUFE;
+            }
+            catch (Exception ex)
+            {
                 var st = new StackTrace(ex, true);
                 var frame = st.GetFrame(0);
                 var line = frame.GetFileLineNumber();
@@ -46,7 +44,7 @@ namespace DS_Saphety_DLL.Controller
             }
         }
 
-        public String enviarAjusteDocumento (DocumentoSoporteAjusteDTO documentoSoporteAjusteDTO)
+        public String enviarAjusteDocumento(DocumentoSoporteAjusteDTO documentoSoporteAjusteDTO)
         {
             try
             {
@@ -54,26 +52,32 @@ namespace DS_Saphety_DLL.Controller
                 CreacionDocumentoDTO respuesta = saphetyController.enviarAjusteDocumento(documentoSoporteAjusteDTO);
                 if (respuesta.errors.Count > 0)
                 {
-                    foreach (WarningErrorDTO error in respuesta.errors)
-                    {
-                        String errorMessage = " - Field: " + error.Field
-                                          + "\n - Code: " + error.Code
-                                          + "\n - Description: " + error.Description;
-                        foreach (String st in error.ExplanationValues)
-                        {
-                            errorMessage += "\n - Explanation Value: " + st;
-                        }
-                        writeErrorInLog(documentoSoporteAjusteDTO.CorrelationDocumentId, errorMessage);
-                    }
+                    catchErrors(respuesta.errors, documentoSoporteAjusteDTO.CorrelationDocumentId);
                     return "ERROR";
                 }
                 else return respuesta.ResultData.CUFE;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 var st = new StackTrace(ex, true);
                 var frame = st.GetFrame(0);
                 var line = frame.GetFileLineNumber();
                 writeErrorInLog(documentoSoporteAjusteDTO.CorrelationDocumentId, "(" + ex + ") " + st.ToString());
                 return "ERROR";
+            }
+        }
+        private void catchErrors(List<WarningErrorDTO> errors, String CorrelationDocumentId)
+        {
+            foreach (WarningErrorDTO error in errors)
+            {
+                String errorMessage = " - Field: " + error.Field
+                                  + "\n - Code: " + error.Code
+                                  + "\n - Description: " + error.Description;
+                foreach (String st in error.ExplanationValues)
+                {
+                    errorMessage += "\n - Explanation Value: " + st;
+                }
+                writeErrorInLog(CorrelationDocumentId, errorMessage);
             }
         }
         private Boolean getAccessToken()
