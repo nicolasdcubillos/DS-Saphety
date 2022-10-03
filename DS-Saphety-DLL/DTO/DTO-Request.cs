@@ -218,6 +218,9 @@ namespace DS_Saphety_DLL
         }
     }
 
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("DocumentReferences.Class")]
+    [ComVisible(true)]
     public class DocumentReferences
     {
         public String DocumentReferred { get; set; }
@@ -226,10 +229,19 @@ namespace DS_Saphety_DLL
         public String DocumentReferredCUFE { get; set; }
     }
 
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("DocumentoSoporteAjusteDTO.Class")]
+    [ComVisible(true)]
     public class DocumentoSoporteAjusteDTO : DocumentoSoporteDTO
     {
         public String ReasonCredit { get; set; }
-        DocumentReferences DocumentReferences { get; set; }
+        public List<DocumentReferences> DocumentReferences { get; set; } = new List <DocumentReferences> ();
+        
+        [DispId(0)]
+        public void addDocumentReferences(DocumentReferences documentReferences)
+        {
+            this.DocumentReferences.Add(documentReferences);
+        }
 
     }
 }
