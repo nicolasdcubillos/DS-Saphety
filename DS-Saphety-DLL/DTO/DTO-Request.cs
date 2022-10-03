@@ -218,8 +218,18 @@ namespace DS_Saphety_DLL
         }
     }
 
+    public class DocumentReferences
+    {
+        public String DocumentReferred { get; set; }
+        public String IssueDate { get; set; }
+        public String Date { get; set; }
+        public String DocumentReferredCUFE { get; set; }
+    }
+
     public class DocumentoSoporteAjusteDTO : DocumentoSoporteDTO
     {
+        public String ReasonCredit { get; set; }
+        DocumentReferences DocumentReferences { get; set; }
 
     }
 }
