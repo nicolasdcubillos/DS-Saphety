@@ -225,7 +225,7 @@ namespace DS_Saphety_DLL
     {
         public String DocumentReferred { get; set; }
         public String IssueDate { get; set; }
-        public String Date { get; set; }
+        public String Type { get; set; }
         public String DocumentReferredCUFE { get; set; }
     }
 
