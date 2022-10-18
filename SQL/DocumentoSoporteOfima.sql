@@ -18,6 +18,34 @@ DROP FUNCTION [dbo].[DS_DATOSPROVEEDOR]
 GO
 DROP FUNCTION [dbo].[DS_DETALLEDCTO]
 GO
+DROP FUNCTION [dbo].[SPLITSTRING]
+GO
+
+CREATE FUNCTION dbo.splitstring ( @stringToSplit VARCHAR(MAX) )
+RETURNS
+ @returnList TABLE ([Name] [nvarchar] (500))
+AS
+BEGIN
+
+ DECLARE @name NVARCHAR(255)
+ DECLARE @pos INT
+
+ WHILE CHARINDEX(',', @stringToSplit) > 0
+ BEGIN
+  SELECT @pos  = CHARINDEX(',', @stringToSplit)  
+  SELECT @name = SUBSTRING(@stringToSplit, 1, @pos-1)
+
+  INSERT INTO @returnList 
+  SELECT @name
+
+  SELECT @stringToSplit = SUBSTRING(@stringToSplit, @pos+1, LEN(@stringToSplit)-@pos)
+ END
+
+ INSERT INTO @returnList
+ SELECT @stringToSplit
+
+ RETURN
+END
 
 
 /*
@@ -108,7 +136,7 @@ REDONDEO.CAMPO = 'REDONCOM'
 	Función DS_DOCUMENTOSSOPORTEENVIAR
 	Retorna la lista de Documento(s) Doporte a enviar en un periodo dado
 	
-	SELECT * FROM DS_DOCUMENTOSSOPORTEENVIAR('DS', '20100901', '20220929')
+	SELECT * FROM DS_DOCUMENTOSSOPORTEENVIAR('DS,DI', '20100901', '20220929')
 */
 
 GO
@@ -120,7 +148,7 @@ CREATE FUNCTION [dbo].[DS_DOCUMENTOSSOPORTEENVIAR]
 @fecha2 date
 )
 Returns Table
-as
+AS
 Return
 (
 SELECT
@@ -136,7 +164,7 @@ T.PASSWORDIN
 FROM
 TRADE T
 WHERE 
-T.TIPODCTO = @tipodcto AND
+T.TIPODCTO IN (SELECT * FROM dbo.splitstring(@tipodcto)) AND
 T.MEUUID = '' AND
 T.FECHA BETWEEN @fecha1 AND @fecha2
 )
