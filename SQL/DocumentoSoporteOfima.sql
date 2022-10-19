@@ -30,9 +30,9 @@ BEGIN
  DECLARE @name NVARCHAR(255)
  DECLARE @pos INT
 
- WHILE CHARINDEX(',', @stringToSplit) > 0
+ WHILE CHARINDEX(' ', @stringToSplit) > 0
  BEGIN
-  SELECT @pos  = CHARINDEX(',', @stringToSplit)  
+  SELECT @pos  = CHARINDEX(' ', @stringToSplit)  
   SELECT @name = SUBSTRING(@stringToSplit, 1, @pos-1)
 
   INSERT INTO @returnList 
