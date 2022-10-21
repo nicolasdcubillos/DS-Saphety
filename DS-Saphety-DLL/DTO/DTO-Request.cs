@@ -99,6 +99,11 @@ namespace DS_Saphety_DLL
             this.ResponsabilityTypes.Add(responsabilityType);
         }
     }
+
+    /*
+     * Taxes
+     */
+
     [ClassInterface(ClassInterfaceType.AutoDual)]
     [ProgId("TaxSubtotal.Class")]
     [ComVisible(true)]
@@ -118,6 +123,32 @@ namespace DS_Saphety_DLL
         public String TaxAmount { get; set; }
         public String RoundingAmount { get; set; }
     }
+
+    /*
+     * With Holding Taxes
+     */
+
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("WithholdingTaxSubTotal.Class")]
+    [ComVisible(true)]
+    public class WithholdingTaxSubTotal
+    {
+        public String WithholdingTaxCategory { get; set; }
+        public String TaxPercentage { get; set; }
+        public String TaxableAmount { get; set; }
+        public String TaxAmount { get; set; }
+    }
+
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("WithholdingTaxTotal.Class")]
+    [ComVisible(true)]
+    public class WithholdingTaxTotal
+    {
+        public String WithholdingTaxCategory { get; set; }
+        public String TaxAmount { get; set; }
+        public String RoundingAmount { get; set; }
+    }
+
     [ClassInterface(ClassInterfaceType.AutoDual)]
     [ProgId("Item.Class")]
     [ComVisible(true)]
@@ -144,6 +175,8 @@ namespace DS_Saphety_DLL
         public String QuantityUnitOfMeasure { get; set; }
         public List<TaxSubtotal> TaxSubtotals { get; set; } = new List<TaxSubtotal>();
         public List<TaxTotal> TaxTotals { get; set; } = new List<TaxTotal>();
+        public List<WithholdingTaxSubTotal> WithholdingTaxSubTotals { get; set; } = new List<WithholdingTaxSubTotal>();
+        public List<WithholdingTaxTotal> WithholdingTaxTotals { get; set; } = new List<WithholdingTaxTotal>();
         public String UnitPrice { get; set; }
         public String GrossAmount { get; set; }
         public String NetAmount { get; set; }
@@ -158,6 +191,16 @@ namespace DS_Saphety_DLL
         public void addTaxTotal(TaxTotal taxTotal)
         {
             this.TaxTotals.Add(taxTotal);
+        }
+        [DispId(2)]
+        public void addWithholdingTaxSubTotal(WithholdingTaxSubTotal withholdingTaxSubTotal)
+        {
+            this.WithholdingTaxSubTotals.Add(withholdingTaxSubTotal);
+        }
+        [DispId(3)]
+        public void addWithholdingTaxTotal(WithholdingTaxTotal withholdingTaxTotal)
+        {
+            this.WithholdingTaxTotals.Add(withholdingTaxTotal);
         }
     }
 
@@ -192,6 +235,8 @@ namespace DS_Saphety_DLL
         public List<Line> Lines { get; set; } = new List<Line>();
         public List<TaxSubtotal> TaxSubtotals { get; set; } = new List<TaxSubtotal>();
         public List<TaxTotal> TaxTotals { get; set; } = new List<TaxTotal>();
+        public List<WithholdingTaxSubTotal> WithholdingTaxSubTotals { get; set; } = new List<WithholdingTaxSubTotal>();
+        public List<WithholdingTaxTotal> WithholdingTaxTotals { get; set; } = new List<WithholdingTaxTotal>();
         public Total Total { get; set; }
         public List<String> Notes { get; set; } = new List<String>();
         
@@ -215,6 +260,16 @@ namespace DS_Saphety_DLL
         public void addTaxTotal(TaxTotal taxTotal)
         {
             this.TaxTotals.Add(taxTotal);
+        }
+        [DispId(4)]
+        public void addWithholdingTaxSubTotal(WithholdingTaxSubTotal withholdingTaxSubTotal)
+        {
+            this.WithholdingTaxSubTotals.Add(withholdingTaxSubTotal);
+        }
+        [DispId(5)]
+        public void addWithholdingTaxTotal(WithholdingTaxTotal withholdingTaxTotal)
+        {
+            this.WithholdingTaxTotals.Add(withholdingTaxTotal);
         }
     }
 
