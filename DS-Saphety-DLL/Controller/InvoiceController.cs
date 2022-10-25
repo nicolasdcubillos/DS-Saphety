@@ -20,6 +20,8 @@ namespace DS_Saphety_DLL.Controller
             empresasAutorizadas.Add("860010268-1");
             empresasAutorizadas.Add("800145400-8");
             empresasAutorizadas.Add("900141348-7");
+            empresasAutorizadas.Add("900024216-2");
+            empresasAutorizadas.Add("815002882-5");            
         }
         public String enviarDocumentoSoporte(DocumentoSoporteDTO documentoSoporteDTO)
         {
