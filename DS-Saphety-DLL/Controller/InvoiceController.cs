@@ -21,7 +21,7 @@ namespace DS_Saphety_DLL.Controller
             empresasAutorizadas.Add("800145400-8");
             empresasAutorizadas.Add("900141348-7");
             empresasAutorizadas.Add("900024216-2");
-            empresasAutorizadas.Add("815002882-5");            
+            empresasAutorizadas.Add("815002882-5");     
         }
         public String enviarDocumentoSoporte(DocumentoSoporteDTO documentoSoporteDTO)
         {
@@ -114,7 +114,7 @@ namespace DS_Saphety_DLL.Controller
             String path = properties.read("PATH") + FOLDER_DOCS;
             validatePath(path);
             StreamWriter sw = new StreamWriter(path + ERRORS_FILE, true);
-            sw.WriteLine("[Respuesta Saphety " + DocumentSerial + "]\n" + error);
+            sw.WriteLine("[Respuesta Saphety " + DocumentSerial + " - " + DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss") + "]\n" + error);
             sw.Close();
         }
         
